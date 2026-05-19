@@ -1,33 +1,33 @@
 #include "stack.h"
 
-void StackInit(Stack* s) {
-    s->top = -1;
+void stack_init(Stack *stack) {
+    stack->top_index = -1;
 }
 
-bool StackIsEmpty(Stack* s) {
-    return s->top == -1;
+bool stack_is_empty(const Stack *stack) {
+    return stack->top_index == -1;
 }
 
-bool StackPush(Stack* s, int x) {
-    if (s->top >= STACK_MAX - 1) {
+bool stack_push(Stack *stack, int value) {
+    if (stack->top_index >= STACK_MAX_SIZE - 1) {
         return false;
     }
-    s->data[++s->top] = x;
+    stack->data[++stack->top_index] = value;
     return true;
 }
 
-bool StackPop(Stack* s) {
-    if (StackIsEmpty(s)) {
+bool stack_pop(Stack *stack) {
+    if (stack_is_empty(stack)) {
         return false;
     }
-    s->top--;
+    --stack->top_index;
     return true;
 }
 
-int StackTop(Stack* s) {
-    return s->data[s->top];
+int stack_top(const Stack *stack) {
+    return stack->data[stack->top_index];
 }
 
-void StackClear(Stack* s) {
-    s->top = -1;
+void stack_clear(Stack *stack) {
+    stack->top_index = -1;
 }

@@ -1,40 +1,38 @@
 #include "queue.h"
 
-void QueueInit(Queue* q) {
-    q->front = 0;
-    q->rear = 0;
-    q->count = 0;
+void queue_init(Queue *queue) {
+    queue->front_index = 0;
+    queue->rear_index = 0;
+    queue->count = 0;
 }
 
-bool QueueIsEmpty(Queue* q) {
-    return q->count == 0;
+bool queue_is_empty(const Queue *queue) {
+    return queue->count == 0;
 }
 
-bool QueueEnqueue(Queue* q, int x) {
-    if (q->count >= QUEUE_MAX) {
+bool queue_enqueue(Queue *queue, int value) {
+    if (queue->count >= QUEUE_MAX_SIZE) {
         return false;
     }
-    q->data[q->rear] = x;
-    q->rear = (q->rear + 1) % QUEUE_MAX;
-    q->count++;
+    queue->data[queue->rear_index] = value;
+    queue->rear_index = (queue->rear_index + 1) % QUEUE_MAX_SIZE;
+    ++queue->count;
     return true;
 }
 
-bool QueueDequeue(Queue* q) {
-    if (QueueIsEmpty(q)) {
+bool queue_dequeue(Queue *queue) {
+    if (queue_is_empty(queue)) {
         return false;
     }
-    q->front = (q->front + 1) % QUEUE_MAX;
-    q->count--;
+    queue->front_index = (queue->front_index + 1) % QUEUE_MAX_SIZE;
+    --queue->count;
     return true;
 }
 
-int QueueFront(Queue* q) {
-    return q->data[q->front];
+int queue_front(const Queue *queue) {
+    return queue->data[queue->front_index];
 }
 
-void QueueClear(Queue* q) {
-    q->front = 0;
-    q->rear = 0;
-    q->count = 0;
+void queue_clear(Queue *queue) {
+    queue_init(queue);
 }

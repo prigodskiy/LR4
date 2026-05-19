@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.15)
 project(DataStructures LANGUAGES C CXX)
 
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -O0 -g")
@@ -35,8 +34,6 @@ add_executable(test_tree tests/test_tree.cpp ${C_SOURCES})
 target_link_libraries(test_tree PRIVATE gtest gtest_main)
 gtest_discover_tests(test_tree)
 
-add_executable(test_tree_cpp tests/test_tree_cpp.cpp src/tree.cpp)
-target_link_libraries(test_tree_cpp PRIVATE gtest gtest_main)
-gtest_discover_tests(test_tree_cpp)
+add_executable(terminal terminal.cpp src/stack.c src/queue.c src/tree.c)
 
 add_executable(main main.c ${C_SOURCES})

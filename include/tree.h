@@ -10,25 +10,23 @@ extern "C" {
 
 typedef struct TreeNode {
     char label;
-    struct TreeNode* left;
-    struct TreeNode* right;
+    struct TreeNode* left_child;
+    struct TreeNode* right_child;
 } TreeNode;
 
 typedef struct {
-    TreeNode* root;
+    TreeNode* root_node;
 } Tree;
 
-TreeNode* TreeNodeCreate(char label);
-void TreeInit(Tree* t);
-TreeNode* TreeRoot(Tree* t);
-void TreeSetLeft(TreeNode* node, TreeNode* child);
-void TreeSetRight(TreeNode* node, TreeNode* child);
-TreeNode* TreeLeftChild(TreeNode* node);
-TreeNode* TreeRightChild(TreeNode* node);
-void TreePreorder(TreeNode* node, void (*visit)(char));
-void TreeInorder(TreeNode* node, void (*visit)(char));
-void TreePostorder(TreeNode* node, void (*visit)(char));
-void TreeFree(Tree* t);
+TreeNode* tree_create_node(char label);
+void tree_init(Tree* tree);
+void tree_set_left(TreeNode* parent, TreeNode* child);
+void tree_set_right(TreeNode* parent, TreeNode* child);
+void tree_preorder(const TreeNode* node, void (*visit)(char));
+void tree_inorder(const TreeNode* node, void (*visit)(char));
+void tree_postorder(const TreeNode* node, void (*visit)(char));
+void tree_free(Tree* tree);
+bool tree_is_empty(const Tree* tree);
 
 #ifdef __cplusplus
 }
